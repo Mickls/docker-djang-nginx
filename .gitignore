@@ -1,0 +1,4 @@
+*.pid
+*.sqlite3
+*.pyc
+*.log

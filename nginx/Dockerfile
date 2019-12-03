@@ -1,0 +1,5 @@
+FROM nginx
+
+MAINTAINER jc
+
+EXPOSE 80 8000

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  web:
+    build: django
+    restart: always
+    privileged: true
+    ports:
+      - "8000:8000"
+    command: uwsgi --ini /code/docker_test.ini
+    volumes:
+      - ./django:/code
+
+  nginx:
+    container_name: nginx-container
+    restart: always
+    depends_on:
+      - web
+    links:
+      - "web:web"
+    build: nginx
+    ports:
+      - "8888:80"
+    volumes:
+      - ./nginx/data:/var/log/nginx
+      - ./nginx/nginx-app.conf:/etc/nginx/conf.d/default.conf
+      - ./django/static:/code/static
